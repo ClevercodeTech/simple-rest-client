@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../App.css';
+import './styles.css';
 
 export default()=> {
   const [url, setUrl] = useState('');
@@ -36,8 +36,8 @@ export default()=> {
   };
 
   return (
-    <div className="container">
-      <h1>Fetch Request Form (React)</h1>
+    <div className="form-container">
+     
       <form onSubmit={handleSubmit}>
         <label htmlFor="url">URL:</label>
         <input

@@ -5,6 +5,8 @@ Welcome to the Simple REST client! This app allows you to send HTTP requests usi
 ## Getting Started
 
 These instructions will help you get the app up and running on your local machine.
+    if you just want to use the app or preview the app please visit 
+    https://clevercodetech.github.io/simple-rest-client/
 
 ### Prerequisites
 
@@ -22,6 +24,7 @@ These instructions will help you get the app up and running on your local machin
 3. Install the dependencies:
     npm install
 
+    Alternatively, 
 
 ### Usage
 1.  Run the app:

@@ -1,0 +1,36 @@
+.history-sidebar {
+    flex: 0 0 300px;
+    background-color: #f2f2f2;
+    border-right: 1px solid #ddd;
+    padding: 20px;
+  }
+  
+  .history-sidebar h2 {
+    margin-bottom: 10px;
+  }
+  
+  .history-sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .history-sidebar li {
+    cursor: pointer;
+    margin-bottom: 5px;
+    padding: 5px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .history-sidebar li:hover {
+    background-color: #f2f2f2;
+  }
+  
+  .history-sidebar{
+    
+  width: 100%;
+    margin: auto;
+    margin-top: 0;
+  }

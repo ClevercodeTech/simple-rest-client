@@ -1,0 +1,17 @@
+header img{
+    height: 50px;
+    width: 50px;
+}
+header{
+    padding: 10px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    line-height: 50px;
+    vertical-align: middle;
+}
+
+header h1{
+    padding: 0;
+    margin: 0;
+}
