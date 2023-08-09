@@ -10,6 +10,7 @@ export const AppProvider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [urlObj, setUrlObj] = useState({
         url: '',
+        https: 'https://',
         requestType: 'get',
         headers: '',
         jsonData: '',
@@ -33,13 +34,15 @@ export const AppProvider = ({ children }) => {
     const setResponse = (val) => {
         setUrlObj({ ...urlObj, response: val },)
     }
-
+    const setHttps = (val) => {
+        setUrlObj({ ...urlObj, https: val },)
+    }
     const addurlHistory = () => {
         let newArray = []
-        if(urlHistory!=null){
-             newArray = [...urlHistory.filter((item) => item.url != urlObj.url), urlObj]
-        } else{
-            newArray =[urlObj]
+        if (urlHistory != null) {
+            newArray = [...urlHistory.filter((item) => item.url != urlObj.url), urlObj]
+        } else {
+            newArray = [urlObj]
         }
         setUHistory(newArray)
         localStorage.setItem('urlHistory', JSON.stringify(newArray));
@@ -48,23 +51,20 @@ export const AppProvider = ({ children }) => {
     const removeurlHistory = (val) => {
         let newArray = []
 
-        if(urlHistory!=null){
+        if (urlHistory != null) {
             newArray = [...urlHistory.filter((item) => item.url != urlObj.url)]
-       }
+        }
         setUHistory(newArray)
         localStorage.setItem('urlHistory', JSON.stringify(newArray));
     }
     const onSelectHistory = (val) => {
-       
         if (val.url != undefined && val.url != "") {
             addurlHistory()
-            setUrlObj(val)           
+            setUrlObj(val)
         }
-
-      
     }
     return (
-        <AppContext.Provider value={{ urlObj, urlHistory, addurlHistory, removeurlHistory, onSelectHistory, setUrl, setRequestType, setHeaders, setJsonData, setResponse, isLoading, setIsLoading }}>
+        <AppContext.Provider value={{ urlObj, urlHistory, addurlHistory, removeurlHistory, onSelectHistory, setUrl, setHttps, setRequestType, setHeaders, setJsonData, setResponse, isLoading, setIsLoading }}>
             {children}
         </AppContext.Provider>
     );

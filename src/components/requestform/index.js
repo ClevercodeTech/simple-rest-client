@@ -6,7 +6,7 @@ import ResponseTabBar from '../responseTabBar';
 
 export default () => {
 
-  const { urlObj, addurlHistory,setUrl, setRequestType, setHeaders, setJsonData, setResponse, isLoading, setIsLoading } = useApp()
+  const { urlObj, addurlHistory, setUrl, setHttps, setRequestType, setHeaders, setJsonData, setResponse, isLoading, setIsLoading } = useApp()
 
   const [items, setItems] = useState([]);
 
@@ -30,7 +30,9 @@ export default () => {
     };
 
     try {
-      const response = await fetch(urlObj.url, requestOptions);
+      let tempUrl = urlObj.url.replace("https://", '').replace("http://", "")
+      let prefix = urlObj.https
+      const response = await fetch(prefix + tempUrl, requestOptions);
       const data = await response.text();
       setResponse(data);
     } catch (error) {
@@ -45,11 +47,16 @@ export default () => {
 
       <form onSubmit={handleSubmit}>
         <label htmlFor="url">URL:</label>
+        <select value={urlObj.https} onChange={(e) => setHttps(e.target.value)}>
+          <option value={'https://'}>Https</option>
+          <option value={'http://'}>Http</option>
+        </select>
+        {urlObj.https}
         <input
           type="text"
           id="url"
           value={urlObj.url}
-          onChange={(e) => setUrl(e.target.value)}
+          onChange={(e) => setUrl(e.target.value.trim())}
           required
         />
 
