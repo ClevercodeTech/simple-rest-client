@@ -1,15 +1,18 @@
 import React from 'react';
 import './styles.css'
-export default ({ history, onSelectHistory }) => {
+import { useApp } from '../../contexts/appContext';
+export default () => {
+
+    const {urlHistory,onSelectHistory} = useApp()
     return (
         <div className="history-sidebar">
             <h2>History</h2>
             <ul>
-                {history.map((entry, index) => (
+                {urlHistory?urlHistory.map((entry, index) => (
                     <li key={index} onClick={() => onSelectHistory(entry)}>
                         {entry.url}
                     </li>
-                ))}
+                )):<li>New </li>}
             </ul>
         </div>
     );

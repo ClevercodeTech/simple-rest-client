@@ -6,7 +6,7 @@ import ResponseTabBar from '../responseTabBar';
 
 export default () => {
 
-  const { url, setUrl, requestType, setRequestType, headers, setHeaders, jsonData, setJsonData, response, setResponse, isLoading, setIsLoading } = useApp()
+  const { urlObj, addurlHistory,setUrl, setRequestType, setHeaders, setJsonData, setResponse, isLoading, setIsLoading } = useApp()
 
   const [items, setItems] = useState([]);
 
@@ -19,18 +19,18 @@ export default () => {
 
     setIsLoading(true);
     setResponse('');
-
+    addurlHistory()
     const requestOptions = {
-      method: requestType.toUpperCase(),
+      method: urlObj.requestType.toUpperCase(),
       headers: {
-        ...(headers && JSON.parse(headers)),
+        ...(urlObj.headers && JSON.parse(urlObj.headers)),
         'Content-Type': 'application/json'
       },
-      body: requestType === 'post' || requestType === 'put' ? jsonData : undefined
+      body: urlObj.requestType === 'post' || urlObj.requestType === 'put' ? urlObj.jsonData : undefined
     };
 
     try {
-      const response = await fetch(url, requestOptions);
+      const response = await fetch(urlObj.url, requestOptions);
       const data = await response.text();
       setResponse(data);
     } catch (error) {
@@ -48,7 +48,7 @@ export default () => {
         <input
           type="text"
           id="url"
-          value={url}
+          value={urlObj.url}
           onChange={(e) => setUrl(e.target.value)}
           required
         />
@@ -56,7 +56,7 @@ export default () => {
         <label htmlFor="request-type">Request Type:</label>
         <select
           id="request-type"
-          value={requestType}
+          value={urlObj.requestType}
           onChange={(e) => setRequestType(e.target.value)}
           required
         >

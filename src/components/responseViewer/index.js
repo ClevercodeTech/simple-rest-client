@@ -3,12 +3,12 @@ import parse from 'html-react-parser';
 
 import './styles.css'
 export default ({ viewType }) => {
-    const { response } = useApp()
-    let responseText = response
+    const { urlObj } = useApp()
+    let responseText = urlObj.response
     switch (viewType) {
         case "JSON":
             try {
-                const parsedData = JSON.parse(response);
+                const parsedData = JSON.parse(urlObj.response);
                 responseText = JSON.stringify(parsedData, null, 2); // Format with 2 spaces
             } catch (error) {
             }
