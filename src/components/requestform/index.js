@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import './styles.css';
+import TabBar from '../tabBar';
+import { useApp } from '../../contexts/appContext';
 
-export default()=> {
-  const [url, setUrl] = useState('');
-  const [requestType, setRequestType] = useState('get');
-  const [headers, setHeaders] = useState('');
-  const [jsonData, setJsonData] = useState('');
-  const [response, setResponse] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+export default () => {
+
+  const { url, setUrl, requestType, setRequestType, headers, setHeaders, jsonData, setJsonData, response, setResponse, isLoading, setIsLoading } = useApp()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,7 +35,7 @@ export default()=> {
 
   return (
     <div className="form-container">
-     
+
       <form onSubmit={handleSubmit}>
         <label htmlFor="url">URL:</label>
         <input
@@ -60,28 +58,7 @@ export default()=> {
           <option value="put">PUT</option>
           <option value="delete">DELETE</option>
         </select>
-
-        {requestType !== 'get' && (
-          <div>
-            <label htmlFor="headers">Custom Headers (JSON):</label>
-            <textarea
-              id="headers"
-              value={headers}
-              onChange={(e) => setHeaders(e.target.value)}
-            />
-          </div>
-        )}
-
-        {(requestType === 'post' || requestType === 'put') && (
-          <div>
-            <label htmlFor="json-data">JSON Data:</label>
-            <textarea
-              id="json-data"
-              value={jsonData}
-              onChange={(e) => setJsonData(e.target.value)}
-            />
-          </div>
-        )}
+        <TabBar />    
 
         <button type="submit" disabled={isLoading}>
           {isLoading ? 'Loading...' : 'Submit'}
