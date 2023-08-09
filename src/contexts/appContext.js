@@ -5,16 +5,35 @@ const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
 
-    const [url, setUrl] = useState('');
-    const [requestType, setRequestType] = useState('get');
-    const [headers, setHeaders] = useState('');
-    const [jsonData, setJsonData] = useState('');
-    const [response, setResponse] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [urlObj, setUrlObj] = useState({
+        url: '',
+        requestType: 'get',
+        headers: '',
+        jsonData: '',
+        response: ''
+    });
+    const [urlHistory, setUHistory] = useState([]);
+
+    const setUrl = (val) => {
+        setUrlObj({ ...urlObj, url: val },)
+    }
+    const setRequestType = (val) => {
+        setUrlObj({ ...urlObj, requestType: val },)
+    }
+    const setHeaders = (val) => {
+        setUrlObj({ ...urlObj, headers: val },)
+    }
+    const setJsonData = (val) => {
+        setUrlObj({ ...urlObj, jsonData: val },)
+    }
+    const setResponse = (val) => {
+        setUrlObj({ ...urlObj, response: val },)
+    }
 
 
     return (
-        <AppContext.Provider value={{ url, setUrl, requestType, setRequestType, headers, setHeaders, jsonData, setJsonData, response, setResponse,isLoading, setIsLoading }}>
+        <AppContext.Provider value={{ ...urlObj, setUrl, setRequestType,  setHeaders,  setJsonData,  setResponse, isLoading, setIsLoading }}>
             {children}
         </AppContext.Provider>
     );

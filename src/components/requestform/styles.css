@@ -44,17 +44,7 @@ button:disabled {
     cursor: not-allowed;
 }
 
-#response {
-    margin-top: 20px;
-    max-width: 600px;
-}
 
-#response textarea {
-    width: 100%;
-    height: 200px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 16px;
-    resize: vertical;
+select{
+    width: 150px;
 }

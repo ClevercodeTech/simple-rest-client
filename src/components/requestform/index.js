@@ -1,11 +1,18 @@
 import React, { useState } from 'react';
 import './styles.css';
-import TabBar from '../tabBar';
+import PayloadTabBar from '../payloadTabBar';
 import { useApp } from '../../contexts/appContext';
+import ResponseTabBar from '../responseTabBar';
 
 export default () => {
 
   const { url, setUrl, requestType, setRequestType, headers, setHeaders, jsonData, setJsonData, response, setResponse, isLoading, setIsLoading } = useApp()
+
+  const [items, setItems] = useState([]);
+
+  // useEffect(() => {
+  //   localStorage.setItem('urlHistory', JSON.stringify(items));
+  // }, [items]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -58,17 +65,14 @@ export default () => {
           <option value="put">PUT</option>
           <option value="delete">DELETE</option>
         </select>
-        <TabBar />    
+        <PayloadTabBar />
 
         <button type="submit" disabled={isLoading}>
           {isLoading ? 'Loading...' : 'Submit'}
         </button>
       </form>
 
-      <div id="response">
-        <label>Response:</label>
-        <textarea id="response-body" value={response} readOnly />
-      </div>
+      <ResponseTabBar />
     </div>
   );
 }
