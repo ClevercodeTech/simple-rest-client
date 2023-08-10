@@ -18,8 +18,7 @@ export const AppProvider = ({ children }) => {
         response: ''
     });
 
-    const [urlHistory, setUHistory] = useState(storedurlHistory);
-
+    const [urlHistory, historyDispatch] = useReducer(historyReducer, storedurlHistory);
 
     function reducer(urlObj, action) {
         switch (action.type) {
@@ -43,34 +42,45 @@ export const AppProvider = ({ children }) => {
         }
     }
 
-    const addurlHistory = () => {
+
+    function historyReducer(urlHistory, action) {
+        let newArray = []
+        switch (action.type) {
+            case 'addurlHistory':
+                return addurlHistory(urlHistory)
+            case 'removeurlHistory':
+                if (urlHistory != null) {
+                    newArray = [...urlHistory.filter((item) => item.url != urlObj.url)]
+                }
+                localStorage.setItem('urlHistory', JSON.stringify(newArray));
+                return newArray
+            case 'onSelectHistory':
+                let newArray = urlHistory
+                if (action.payload.url != undefined && action.payload.url != "") {
+                    newArray = addurlHistory(urlHistory)
+                    urlObjDispatch({ type: 'seturlObj', payload: action.payload })
+                }
+                return newArray
+            default:
+                return urlHistory;
+        }
+    }
+
+
+    function addurlHistory(urlHistory) {
         let newArray = []
         if (urlHistory != null) {
             newArray = [...urlHistory.filter((item) => item.url != urlObj.url), urlObj]
         } else {
-            newArray = [urlObj]
+            if( urlObj.url!="") newArray = [urlObj]
         }
-        setUHistory(newArray)
         localStorage.setItem('urlHistory', JSON.stringify(newArray));
+        return newArray
     }
 
-    const removeurlHistory = (val) => {
-        let newArray = []
 
-        if (urlHistory != null) {
-            newArray = [...urlHistory.filter((item) => item.url != urlObj.url)]
-        }
-        setUHistory(newArray)
-        localStorage.setItem('urlHistory', JSON.stringify(newArray));
-    }
-    const onSelectHistory = (val) => {
-        if (val.url != undefined && val.url != "") {
-            addurlHistory()        
-            urlObjDispatch({ type: 'seturlObj', payload: val })
-        }
-    }
     return (
-        <AppContext.Provider value={{ urlObj,urlObjDispatch, urlHistory, addurlHistory, removeurlHistory, onSelectHistory, isLoading, setIsLoading }}>
+        <AppContext.Provider value={{ urlObj, urlObjDispatch, urlHistory, historyDispatch, isLoading, setIsLoading }}>
             {children}
         </AppContext.Provider>
     );

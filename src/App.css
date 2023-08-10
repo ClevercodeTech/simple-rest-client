@@ -1,6 +1,6 @@
 .App {
   display: grid;
-  grid-template-rows: 1fr 8fr;
+  grid-template-rows: .5fr 8fr;
 }
 
 .App main{

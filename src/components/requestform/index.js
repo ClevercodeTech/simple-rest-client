@@ -6,7 +6,7 @@ import ResponseTabBar from '../responseTabBar';
 
 export default () => {
 
-  const { urlObj, urlObjDispatch, addurlHistory, isLoading, setIsLoading } = useApp()
+  const { urlObj, urlObjDispatch, historyDispatch, isLoading, setIsLoading } = useApp()
 
 
   const handleSubmit = async (e) => {
@@ -14,7 +14,8 @@ export default () => {
 
     setIsLoading(true);
     urlObjDispatch({ type: 'setResponse', payload: '' })
-    addurlHistory()
+    urlObjDispatch({ type: 'setResponse', payload: '' })
+    historyDispatch({ type: 'addurlHistory' })
     const requestOptions = {
       method: urlObj.requestType.toUpperCase(),
       headers: {

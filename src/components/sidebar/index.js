@@ -1,19 +1,55 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './styles.css'
 import { useApp } from '../../contexts/appContext';
+
+import { Box, List, ListItem, Divider, ListItemButton,Button,Drawer} from '@mui/material'
+import {ListIcon} from '@mui/icons-material'
+
 export default () => {
 
-    const {urlHistory,onSelectHistory} = useApp()
-    return (
-        <div className="history-sidebar">
-            <h2>History</h2>
-            <ul>
-                {urlHistory?urlHistory.map((entry, index) => (
-                    <li key={index} onClick={() => onSelectHistory(entry)}>
-                        {entry.url}
-                    </li>
-                )):<li>New </li>}
-            </ul>
-        </div>
-    );
+    const { urlHistory, historyDispatch } = useApp()
+    const [showSideBar, setShowSidebar] = useState(true)
+    const list = () => (
+        <Box
+            sx={{ width: 250 }}
+            role="presentation"
+            onClick={() => setShowSidebar(false)}
+            onKeyDown={() => setShowSidebar(false)}
+        >
+            <List>
+                {urlHistory ? urlHistory.map((entry, index) => (
+                    <ListItem key={entry.url} disablePadding>
+                        <ListItemButton key={index} onClick={() => historyDispatch({ type: 'onSelectHistory', payload: entry })}>
+                            {entry.url}
+                        </ListItemButton>
+                    </ListItem>
+                )) : <ListItem>Add</ListItem>}
+            </List>
+            <Divider />
+            <List>
+                {urlHistory ? urlHistory.map((entry, index) => (
+                    <ListItem key={entry.url} disablePadding>
+                        <ListItemButton key={index} onClick={() => historyDispatch({ type: 'onSelectHistory', payload: entry })}>
+                            {entry.url}
+                        </ListItemButton>
+                    </ListItem>
+                )) : <ListItem>Add</ListItem>}
+            </List>
+        </Box>
+    )
+
+
+    return (<div>
+        <ListIcon onClick={() => setShowSidebar(true)}/>
+        <Drawer
+            open={showSideBar}
+            onClose={() => setShowSidebar(false)}
+        >
+            {list()}
+        </Drawer>
+
+    </div>
+
+    )
 }
+
