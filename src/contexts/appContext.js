@@ -1,5 +1,5 @@
 
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useReducer } from "react";
 
 const AppContext = createContext();
 
@@ -8,7 +8,8 @@ export const AppProvider = ({ children }) => {
     const storedurlHistory = JSON.parse(localStorage.getItem('urlHistory'));
 
     const [isLoading, setIsLoading] = useState(false);
-    const [urlObj, setUrlObj] = useState({
+
+    const [urlObj, urlObjDispatch] = useReducer(reducer, {
         url: '',
         https: 'https://',
         requestType: 'get',
@@ -19,24 +20,29 @@ export const AppProvider = ({ children }) => {
 
     const [urlHistory, setUHistory] = useState(storedurlHistory);
 
-    const setUrl = (val) => {
-        setUrlObj({ ...urlObj, url: val },)
+
+    function reducer(urlObj, action) {
+        switch (action.type) {
+            case 'setUrl':
+                return ({ ...urlObj, url: action.payload })
+
+            case 'setRequestType':
+                return ({ ...urlObj, requestType: action.payload })
+            case 'setHeaders':
+                return ({ ...urlObj, headers: action.payload })
+            case 'setJsonData':
+                return ({ ...urlObj, jsonData: action.payload })
+            case 'setResponse':
+                return ({ ...urlObj, response: action.payload })
+            case 'setHttps':
+                return ({ ...urlObj, https: action.payload })
+            case 'seturlObj':
+                return (action.payload)
+            default:
+                return urlObj;
+        }
     }
-    const setRequestType = (val) => {
-        setUrlObj({ ...urlObj, requestType: val },)
-    }
-    const setHeaders = (val) => {
-        setUrlObj({ ...urlObj, headers: val },)
-    }
-    const setJsonData = (val) => {
-        setUrlObj({ ...urlObj, jsonData: val },)
-    }
-    const setResponse = (val) => {
-        setUrlObj({ ...urlObj, response: val },)
-    }
-    const setHttps = (val) => {
-        setUrlObj({ ...urlObj, https: val },)
-    }
+
     const addurlHistory = () => {
         let newArray = []
         if (urlHistory != null) {
@@ -59,12 +65,12 @@ export const AppProvider = ({ children }) => {
     }
     const onSelectHistory = (val) => {
         if (val.url != undefined && val.url != "") {
-            addurlHistory()
-            setUrlObj(val)
+            addurlHistory()        
+            urlObjDispatch({ type: 'seturlObj', payload: val })
         }
     }
     return (
-        <AppContext.Provider value={{ urlObj, urlHistory, addurlHistory, removeurlHistory, onSelectHistory, setUrl, setHttps, setRequestType, setHeaders, setJsonData, setResponse, isLoading, setIsLoading }}>
+        <AppContext.Provider value={{ urlObj,urlObjDispatch, urlHistory, addurlHistory, removeurlHistory, onSelectHistory, isLoading, setIsLoading }}>
             {children}
         </AppContext.Provider>
     );
@@ -73,3 +79,5 @@ export const AppProvider = ({ children }) => {
 export const useApp = () => {
     return useContext(AppContext);
 };
+
+

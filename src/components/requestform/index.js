@@ -6,19 +6,14 @@ import ResponseTabBar from '../responseTabBar';
 
 export default () => {
 
-  const { urlObj, addurlHistory, setUrl, setHttps, setRequestType, setHeaders, setJsonData, setResponse, isLoading, setIsLoading } = useApp()
+  const { urlObj, urlObjDispatch, addurlHistory, isLoading, setIsLoading } = useApp()
 
-  const [items, setItems] = useState([]);
-
-  // useEffect(() => {
-  //   localStorage.setItem('urlHistory', JSON.stringify(items));
-  // }, [items]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     setIsLoading(true);
-    setResponse('');
+    urlObjDispatch({ type: 'setResponse', payload: '' })
     addurlHistory()
     const requestOptions = {
       method: urlObj.requestType.toUpperCase(),
@@ -34,9 +29,9 @@ export default () => {
       let prefix = urlObj.https
       const response = await fetch(prefix + tempUrl, requestOptions);
       const data = await response.text();
-      setResponse(data);
+      urlObjDispatch({ type: 'setResponse', payload: data })
     } catch (error) {
-      setResponse(`Error: ${error.message}`);
+      urlObjDispatch({ type: 'setResponse', payload: `Error: ${error.message}` })
     }
 
     setIsLoading(false);
@@ -47,7 +42,7 @@ export default () => {
 
       <form onSubmit={handleSubmit}>
         <label htmlFor="url">URL:</label>
-        <select value={urlObj.https} onChange={(e) => setHttps(e.target.value)}>
+        <select value={urlObj.https} onChange={(e) => urlObjDispatch({ type: 'setHttps', payload: e.target.value })}>
           <option value={'https://'}>Https</option>
           <option value={'http://'}>Http</option>
         </select>
@@ -56,7 +51,7 @@ export default () => {
           type="text"
           id="url"
           value={urlObj.url}
-          onChange={(e) => setUrl(e.target.value.trim())}
+          onChange={(e) => urlObjDispatch({ type: 'setUrl', payload: e.target.value.trim() })}
           required
         />
 
@@ -64,7 +59,7 @@ export default () => {
         <select
           id="request-type"
           value={urlObj.requestType}
-          onChange={(e) => setRequestType(e.target.value)}
+          onChange={(e) => urlObjDispatch({ type: 'setRequestType', payload: e.target.value })}
           required
         >
           <option value="get">GET</option>
