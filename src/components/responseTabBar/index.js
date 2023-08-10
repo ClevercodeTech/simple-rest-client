@@ -14,7 +14,8 @@ export default () => {
 
     return (
 
-        <div>
+        <Box sx={4} md={4} xs={4}>
+            <b>Response</b>
             {
                 urlObj.response == "" ? <div> </div> :
                     <div>
@@ -39,7 +40,7 @@ export default () => {
             }
 
 
-        </div>
+        </Box>
     )
 }
 

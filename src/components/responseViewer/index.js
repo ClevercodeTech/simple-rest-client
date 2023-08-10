@@ -1,6 +1,6 @@
 import { useApp } from "../../contexts/appContext";
 import parse from 'html-react-parser';
-
+import { Box, TextareaAutosize } from '@mui/material'
 import './styles.css'
 export default ({ viewType }) => {
     const { urlObj } = useApp()
@@ -25,15 +25,18 @@ export default ({ viewType }) => {
 
 
     return (
-        <div id="response">
+        <Box id="response" >
+            
             {viewType=="Html"?
 
-                 <div  id="response-body" >{parse(responseText.replace('<html','<div').replace('</html','</div'))} </div>
+                 <Box  id="response-body" >
+                    {parse(responseText.replace('<html','<div').replace('</html','</div'))} </Box>
                  :
-                 <textarea id="response-body" value={responseText} readOnly />
+                 <TextareaAutosize 
+                 id="response-body" value={responseText} readOnly minRows={5} maxRows={10}/>
             }
             
            
-        </div>
+        </Box>
     )
 }

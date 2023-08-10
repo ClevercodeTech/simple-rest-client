@@ -4,26 +4,24 @@ import Requestform from './components/requestform';
 import { useState } from 'react';
 import Sidebar from './components/sidebar';
 import Header from './components/header';
+import { Grid } from '@mui/material';
 function App() {
-  const [history, setHistory] = useState([]);
-
-  const handleSelectHistory = (entry) => {
-    // setUrl(entry.url);
-    // setRequestType(entry.requestType);
-    // setHeaders(entry.headers);
-    // setJsonData(entry.jsonData);
-  };
+ 
 
   return (
-    <div className="App">
-      <Header />
-      <main>
-      <Sidebar history={history} onSelectHistory={handleSelectHistory} />
-      <Requestform />
-      </main>
-     
 
-    </div>
+    <Grid container>
+      <Grid item xs={12} sm={12} md={12} >
+        <Header />
+      </Grid>
+      <Grid item xs={2} sm={3} md={3} >
+        <Sidebar />
+      </Grid>
+      <Grid item xs={10} sm={9} md={9} >
+        <Requestform />
+      </Grid>
+    </Grid>
+
   );
 }
 

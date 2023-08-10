@@ -3,7 +3,7 @@ import './styles.css';
 import PayloadTabBar from '../payloadTabBar';
 import { useApp } from '../../contexts/appContext';
 import ResponseTabBar from '../responseTabBar';
-
+import { Button, TextField, Select, MenuItem, FormControl, InputLabel, Input, Box } from '@mui/material';
 export default () => {
 
   const { urlObj, urlObjDispatch, historyDispatch, isLoading, setIsLoading } = useApp()
@@ -40,42 +40,48 @@ export default () => {
 
   return (
     <div className="form-container">
+      <Box padding={2} margin={2} width={300} > 
+      <FormControl onSubmit={handleSubmit} >
 
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="url">URL:</label>
-        <select value={urlObj.https} onChange={(e) => urlObjDispatch({ type: 'setHttps', payload: e.target.value })}>
-          <option value={'https://'}>Https</option>
-          <option value={'http://'}>Http</option>
-        </select>
-        {urlObj.https}
-        <input
+        <Select          
+          label="Request Type"
+        value={urlObj.https} onChange={(e) => urlObjDispatch({ type: 'setHttps', payload: e.target.value })}>
+          <MenuItem value={'https://'}>Https</MenuItem>
+          <MenuItem value={'http://'}>Http</MenuItem>
+        </Select>
+  
+        <TextField
+          m={3}
+          id="outlined-basic" variant="outlined"
+          label={"url: " + urlObj.https}
           type="text"
-          id="url"
           value={urlObj.url}
           onChange={(e) => urlObjDispatch({ type: 'setUrl', payload: e.target.value.trim() })}
           required
         />
 
-        <label htmlFor="request-type">Request Type:</label>
-        <select
+        <InputLabel htmlFor="request-type">Request Type:</InputLabel>
+        <Select
           id="request-type"
           value={urlObj.requestType}
           onChange={(e) => urlObjDispatch({ type: 'setRequestType', payload: e.target.value })}
           required
         >
-          <option value="get">GET</option>
-          <option value="post">POST</option>
-          <option value="put">PUT</option>
-          <option value="delete">DELETE</option>
-        </select>
+          <MenuItem value="get">GET</MenuItem>
+          <MenuItem value="post">POST</MenuItem>
+          <MenuItem value="put">PUT</MenuItem>
+          <MenuItem value="delete">DELETE</MenuItem>
+        </Select>
         <PayloadTabBar />
 
-        <button type="submit" disabled={isLoading}>
+        <Button variant="contained" type="submit" disabled={isLoading}>
           {isLoading ? 'Loading...' : 'Submit'}
-        </button>
-      </form>
+        </Button>
+      </FormControl>
 
       <ResponseTabBar />
+      </Box>
+      
     </div>
   );
 }
