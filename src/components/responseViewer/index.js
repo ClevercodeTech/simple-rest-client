@@ -32,7 +32,7 @@ export default ({ viewType }) => {
                  <Box  id="response-body" >
                     {parse(responseText.replace('<html','<div').replace('</html','</div'))} </Box>
                  :
-                 <TextareaAutosize 
+                 <textarea 
                  id="response-body" value={responseText} readOnly minRows={5} maxRows={10}/>
             }
             
