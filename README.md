@@ -1,4 +1,4 @@
-# Simple REST client 
+# <img src="./public/logo512.png" width="50" alt="logo"> Simple REST client 
 
 Welcome to the Simple REST client! This app allows you to send HTTP requests using various methods (GET, POST, PUT, DELETE) and view the responses. The app is built using React and offers a user-friendly interface to interact with APIs.
 
