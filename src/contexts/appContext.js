@@ -51,7 +51,7 @@ export const AppProvider = ({ children }) => {
             case 'removeurlHistory':
                 let newArray2 = urlHistory
                 if (urlHistory != null) {
-                    newArray2 = [...urlHistory.filter((item) => item.url != urlObj.url)]
+                    newArray2 = [...urlHistory.filter((item) => item.url != action.payload.url)]
                 }
                 localStorage.setItem('urlHistory', JSON.stringify(newArray2));
                 return newArray2
@@ -71,7 +71,10 @@ export const AppProvider = ({ children }) => {
     function addurlHistory(urlHistory) {
         let newArray = []
         if (urlHistory != null) {
-            newArray = [...urlHistory.filter((item) => item.url != urlObj.url), urlObj]
+            newArray = [...urlHistory.filter((item) => item.url != urlObj.url)]
+            if(urlObj.url!=""){
+                newArray.push(urlObj)
+            }
         } else {
             if( urlObj.url!="") newArray = [urlObj]
         }

@@ -1,17 +1,21 @@
 .form-container select,
 .form-container input,
 .form-container textarea {
-    width: 250px;
     margin-top: 5px;
     margin-bottom: 5px;
     padding: 10px;
     border: 1px solid rgba(128, 128, 128, 0.459);
     border-radius: 5px;
+    max-width: 200px;
 }
 
-.form-container select{
-    width: 100px;
+.form-container select {
+    width: 80px;
+    line-height: normal;
+    padding: 5px;
+    margin: 2px;
 }
+
 .form-container select:focus,
 .form-container input:focus {
     border: 1px solid rgba(11, 174, 255, 0.459);
@@ -22,7 +26,33 @@
 }
 
 .form-container textarea {
-height: 100px;
-width: 100%;
-overflow: auto;
+    height: 100px;
+    min-width: 250px;
+
+    overflow: auto;
+}
+
+.form-container form {
+    display: grid;
+    grid-template-columns: auto;
+    line-height: 30px;
+}
+
+
+
+.form-container form>button {
+    width: 200px;
+}
+
+.form-container div {
+    max-width: 300px;
+}
+
+.form-container form>span {
+    padding: 5px;   
+}
+
+.form-container form span label{
+    font-size: smaller;
+    margin-right: 50px;
 }

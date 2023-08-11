@@ -40,39 +40,50 @@ export default () => {
 
   return (
     <div className="form-container">
-      <Box padding={2} margin={2} width={300} >
+      <Box padding={1} margin={1} sx={{ flexDirection: 'row' }}>
         <form onSubmit={handleSubmit} >
+          <span>
+            <label htmlFor='http Type' >{urlObj.https=='https://'?'Secure':'Unsecure'} </label>
+            <select
+              title='http Type"'
+              name="http Type"
+              value={urlObj.https} onChange={(e) => urlObjDispatch({ type: 'setHttps', payload: e.target.value })}>
+              <option value={'https://'}>Https</option>
+              <option value={'http://'}>Http</option>
+            </select>
+          </span>
+          <span>
+            <label htmlFor='url'>URL</label>
+            <input
+              name='url'
+              title='url'
+              placeholder={"Type url"}
+              type="text"
+              value={urlObj.url}
+              onChange={(e) => urlObjDispatch({ type: 'setUrl', payload: e.target.value.trim() })}
+              required
+            />
+          </span>
+          <span>
+            <label htmlFor='Request Type'> Reques Type </label>
+            <select
+              id="request-type"
+              name='Request Type'
+              title='request type'
+              value={urlObj.requestType}
+              onChange={(e) => urlObjDispatch({ type: 'setRequestType', payload: e.target.value })}
+              required
+            >
+              <option value="get">GET</option>
+              <option value="post">POST</option>
+              <option value="put">PUT</option>
+              <option value="delete">DELETE</option>
+            </select>
+          </span>
 
-          <select
-            label="Request Type"
-            value={urlObj.https} onChange={(e) => urlObjDispatch({ type: 'setHttps', payload: e.target.value })}>
-            <option value={'https://'}>Https</option>
-            <option value={'http://'}>Http</option>
-          </select>
-
-          <Input
-            id="outlined-basic" variant="outlined"
-            placeholder={"Type url"}
-            type="text"
-            value={urlObj.url}
-            onChange={(e) => urlObjDispatch({ type: 'setUrl', payload: e.target.value.trim() })}
-            required
-          />
-
-          <select
-            id="request-type"
-            value={urlObj.requestType}
-            onChange={(e) => urlObjDispatch({ type: 'setRequestType', payload: e.target.value })}
-            required
-          >
-            <option value="get">GET</option>
-            <option value="post">POST</option>
-            <option value="put">PUT</option>
-            <option value="delete">DELETE</option>
-          </select>
           <PayloadTabBar />
 
-          <Button variant="contained" type="submit" disabled={isLoading}>
+          <Button variant="contained" type="submit" disabled={isLoading} title='submit button'>
             {isLoading ? 'Loading...' : 'Submit'}
           </Button>
         </form>
