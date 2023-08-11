@@ -14,7 +14,7 @@ export default () => {
 
     return (
 
-        <Box sx={4} md={4} xs={4}>
+        <Box >
             <b>Response</b>
             {
                 urlObj.response == "" ? <div> </div> :
@@ -27,7 +27,8 @@ export default () => {
                             </Tabs>
                         </Box>
 
-                        {tabIndex == 0 ? <div value={tabIndex} index={0}>
+                        {tabIndex == 0 ? 
+                        <div value={tabIndex} index={0}>
                             <ResponseViewer viewType={"JSON"} />
                         </div> : tabIndex == 1 ?
                             <div value={tabIndex} index={1}>

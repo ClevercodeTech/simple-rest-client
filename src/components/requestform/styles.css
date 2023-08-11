@@ -10,7 +10,7 @@
 }
 
 .form-container select{
-    width: 270px;
+    width: 100px;
 }
 .form-container select:focus,
 .form-container input:focus {
@@ -23,5 +23,6 @@
 
 .form-container textarea {
 height: 100px;
+width: 100%;
 overflow: auto;
 }

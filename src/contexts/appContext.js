@@ -49,11 +49,12 @@ export const AppProvider = ({ children }) => {
             case 'addurlHistory':
                 return addurlHistory(urlHistory)
             case 'removeurlHistory':
+                let newArray2 = urlHistory
                 if (urlHistory != null) {
-                    newArray = [...urlHistory.filter((item) => item.url != urlObj.url)]
+                    newArray2 = [...urlHistory.filter((item) => item.url != urlObj.url)]
                 }
-                localStorage.setItem('urlHistory', JSON.stringify(newArray));
-                return newArray
+                localStorage.setItem('urlHistory', JSON.stringify(newArray2));
+                return newArray2
             case 'onSelectHistory':
                 let newArray = urlHistory
                 if (action.payload.url != undefined && action.payload.url != "") {

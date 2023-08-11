@@ -25,7 +25,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { Image } from '@mui/icons-material';
-
+import SyncAltIcon from '@mui/icons-material/SyncAlt';
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
@@ -52,8 +52,8 @@ function ResponsiveAppBar() {
     <AppBar position="static" style={{ background: 'white',color:'black' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-        <img src={logo} height={20} width={20} style={{padding:'10px'}}/>
-        
+      
+        <SyncAltIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
  
           <Typography
             variant="h6"
@@ -87,7 +87,7 @@ function ResponsiveAppBar() {
             </IconButton>
           
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          <SyncAltIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
@@ -104,7 +104,7 @@ function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            SRC
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
          
@@ -113,7 +113,7 @@ function ResponsiveAppBar() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="S Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
             <Menu

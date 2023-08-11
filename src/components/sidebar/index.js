@@ -4,6 +4,8 @@ import { useApp } from '../../contexts/appContext';
 
 import { Box, List, ListItem, Divider, ListItemButton, Button, Drawer } from '@mui/material'
 import ListIcon from '@mui/icons-material/List';
+import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
+import { IconButton } from '@mui/material';
 
 export default () => {
 
@@ -19,14 +21,26 @@ export default () => {
         >
             <List>
                 {urlHistory ? urlHistory.map((entry, index) => (
-                    <ListItem key={entry.url} disablePadding>
-                        <ListItemButton key={index} onClick={() => historyDispatch({ type: 'onSelectHistory', payload: entry })}>
-                            {entry.url}
-                        </ListItemButton>
-                    </ListItem>
+                    <div key={entry.url+'div'} >
+                        <ListItem key={entry.url} disablePadding >
+                            <ListItemButton key={index}
+                                style={{ justifyContent: "space-between" }}
+                                onClick={() => historyDispatch({ type: 'onSelectHistory', payload: entry })}>
+                                {entry.url}
+                            </ListItemButton>
+                            <IconButton onClick={() => historyDispatch({ type: 'removeurlHistory', payload: entry })}>
+                                <RemoveCircleOutlineIcon fontSize='small' color='grey' />
+
+                            </IconButton>
+
+                        </ListItem>
+                        <Divider key={entry.url+'divider'}  />
+                    </div>
+
+
                 )) : <ListItem>Add</ListItem>}
             </List>
-            <Divider />
+
         </Box>
     )
 
