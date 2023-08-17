@@ -5,11 +5,12 @@ import { useApp } from '../../contexts/appContext';
 import { Box, List, ListItem, Divider, ListItemButton, Button, Drawer } from '@mui/material'
 import ListIcon from '@mui/icons-material/List';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
+import AddIcon from '@mui/icons-material/Add';
 import { IconButton } from '@mui/material';
 
 export default () => {
 
-    const { urlHistory, historyDispatch } = useApp()
+    const { urlHistory, historyDispatch, urlObjDispatch } = useApp()
     const [showSideBar, setShowSidebar] = useState(true)
     const list = () => (
         <Box
@@ -20,8 +21,21 @@ export default () => {
 
         >
             <List>
+                <ListItem key={'NewUrl'} disablePadding >
+                    <ListItemButton key={'newUrlListButton'}
+                        style={{ justifyContent: "space-between" }}
+                        onClick={() => urlObjDispatch({ type: 'addNewurl' })}>
+                        {'Add New'}
+                    </ListItemButton>
+                    <IconButton onClick={() => urlObjDispatch({ type: 'addNewurl' })}>
+                        <AddIcon fontSize='small' color='grey' />
+                    </IconButton>
+
+                </ListItem>
+                <Divider key={'NewUrl' + 'divider'} />
+
                 {urlHistory ? urlHistory.map((entry, index) => (
-                    <div key={entry.url+'div'} >
+                    <div key={entry.url + 'div'} >
                         <ListItem key={entry.url} disablePadding >
                             <ListItemButton key={index}
                                 style={{ justifyContent: "space-between" }}
@@ -34,7 +48,7 @@ export default () => {
                             </IconButton>
 
                         </ListItem>
-                        <Divider key={entry.url+'divider'}  />
+                        <Divider key={entry.url + 'divider'} />
                     </div>
 
 

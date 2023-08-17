@@ -5,26 +5,27 @@ const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
 
-    const storedurlHistory = JSON.parse(localStorage.getItem('urlHistory'));
-
-    const [isLoading, setIsLoading] = useState(false);
-
-    const [urlObj, urlObjDispatch] = useReducer(reducer, {
+    const emptyurlObj = {
         url: '',
         https: 'https://',
         requestType: 'get',
         headers: '',
         jsonData: '',
         response: ''
-    });
+    }
+    const storedurlHistory = JSON.parse(localStorage.getItem('urlHistory'));
+
+    const [isLoading, setIsLoading] = useState(false);
+
+    const [urlObj, urlObjDispatch] = useReducer(reducer, emptyurlObj);
 
     const [urlHistory, historyDispatch] = useReducer(historyReducer, storedurlHistory);
 
-    function reducer(urlObj, action) {
+    function reducer(urlObj, action) {     
+
         switch (action.type) {
             case 'setUrl':
                 return ({ ...urlObj, url: action.payload })
-
             case 'setRequestType':
                 return ({ ...urlObj, requestType: action.payload })
             case 'setHeaders':
@@ -37,6 +38,8 @@ export const AppProvider = ({ children }) => {
                 return ({ ...urlObj, https: action.payload })
             case 'seturlObj':
                 return (action.payload)
+            case 'addNewurl':
+                return (emptyurlObj)
             default:
                 return urlObj;
         }
