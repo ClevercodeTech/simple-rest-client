@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/simple-rest-client/static/css/main.035a5dd1.css",
-    "main.js": "/simple-rest-client/static/js/main.5fc392a6.js",
+    "main.css": "/simple-rest-client/static/css/main.89d0b2d2.css",
+    "main.js": "/simple-rest-client/static/js/main.d5b80544.js",
     "static/js/787.3b843d69.chunk.js": "/simple-rest-client/static/js/787.3b843d69.chunk.js",
     "static/media/logo.png": "/simple-rest-client/static/media/logo.493e8750726baefe7f9f.png",
     "index.html": "/simple-rest-client/index.html",
-    "main.035a5dd1.css.map": "/simple-rest-client/static/css/main.035a5dd1.css.map",
-    "main.5fc392a6.js.map": "/simple-rest-client/static/js/main.5fc392a6.js.map",
+    "main.89d0b2d2.css.map": "/simple-rest-client/static/css/main.89d0b2d2.css.map",
+    "main.d5b80544.js.map": "/simple-rest-client/static/js/main.d5b80544.js.map",
     "787.3b843d69.chunk.js.map": "/simple-rest-client/static/js/787.3b843d69.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.035a5dd1.css",
-    "static/js/main.5fc392a6.js"
+    "static/css/main.89d0b2d2.css",
+    "static/js/main.d5b80544.js"
   ]
 }
