@@ -26,7 +26,7 @@
 }
 
 .form-container textarea {
-    height: 100px;
+    min-height: 100px;
     min-width: 350px;
     overflow: auto;
 }
@@ -37,7 +37,9 @@
     line-height: 30px;
 }
 
-
+#response{
+    min-height: 100px;
+}
 
 .form-container form>button {
     width: 200px;

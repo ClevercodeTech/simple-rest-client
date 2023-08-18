@@ -32,7 +32,9 @@ export default ({ viewType }) => {
                  <Box  id="response-body" >
                     {parse(responseText.replace('<html','<div').replace('</html','</div'))} </Box>
                  :
-                 <textarea 
+
+                 
+                 <textarea style={{height:"auto"}}
                  id="response-body" value={responseText} readOnly />
             }
             

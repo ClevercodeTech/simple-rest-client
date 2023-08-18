@@ -12,8 +12,8 @@ export default()=>{
               id="headers"
               value={urlObj.headers}
               onChange={(e) =>  urlObjDispatch({ type: 'setHeaders', payload: e.target.value })}             
-              placeholder={(urlObj.requestType === 'get')?'Not required':'Please enter your header here'}
-              disabled ={urlObj.requestType === 'get'}                   
+              placeholder={'Please enter your header here'}
+                              
             />
           </div>
       

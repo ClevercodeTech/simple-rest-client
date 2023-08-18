@@ -7,23 +7,31 @@ import { Button, TextField, select, option, form, InputLabel, Input, Box } from 
 export default () => {
 
   const { urlObj, urlObjDispatch, historyDispatch, isLoading, setIsLoading } = useApp()
-
+  const [errorSending, setErrorSending] = useState(undefined)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setErrorSending(undefined)
     setIsLoading(true);
     urlObjDispatch({ type: 'setResponse', payload: '' })
-    urlObjDispatch({ type: 'setResponse', payload: '' })
-    historyDispatch({ type: 'addurlHistory' })
-    const requestOptions = {
-      method: urlObj.requestType.toUpperCase(),
-      headers: {
-        ...(urlObj.headers && JSON.parse(urlObj.headers)),
-        'Content-Type': 'application/json'
-      },
-      body: urlObj.requestType === 'post' || urlObj.requestType === 'put' ? urlObj.jsonData : undefined
-    };
+    let requestOptions={}
+    try {
+       requestOptions = {
+        method: urlObj.requestType.toUpperCase(),
+        headers: {
+          ...(urlObj.headers && JSON.parse(urlObj.headers)),
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        },
+        body: urlObj.requestType === 'post' || urlObj.requestType === 'put' ? urlObj.jsonData : undefined
+      };
+    } catch (error) {
+      console.log(error)
+      setErrorSending(error.toString())
+      setIsLoading(false);
+      return      
+    }
+    
 
     try {
       let tempUrl = urlObj.url.replace("https://", '').replace("http://", "")
@@ -34,7 +42,7 @@ export default () => {
     } catch (error) {
       urlObjDispatch({ type: 'setResponse', payload: `Error: ${error.message}` })
     }
-
+    historyDispatch({ type: 'addurlHistory' })
     setIsLoading(false);
   };
 
@@ -43,7 +51,7 @@ export default () => {
       <Box padding={1} margin={1} sx={{ flexDirection: 'row' }}>
         <form onSubmit={handleSubmit} >
           <span>
-            <label htmlFor='http Type' >{urlObj.https=='https://'?'Secure':'Unsecure'} </label>
+            <label htmlFor='http Type' >{urlObj.https == 'https://' ? 'Secure' : 'Unsecure'} </label>
             <select
               title='http Type"'
               name="http Type"
@@ -89,6 +97,10 @@ export default () => {
         </form>
 
         <ResponseTabBar />
+        {errorSending!=undefined? <div>
+          Error! <br/>
+          {errorSending}</div>:null}
+        
       </Box>
 
     </div>

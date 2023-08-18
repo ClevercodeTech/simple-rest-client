@@ -21,7 +21,7 @@ export const AppProvider = ({ children }) => {
 
     const [urlHistory, historyDispatch] = useReducer(historyReducer, storedurlHistory);
 
-    function reducer(urlObj, action) {     
+    function reducer(urlObj, action) {
 
         switch (action.type) {
             case 'setUrl':
@@ -65,9 +65,28 @@ export const AppProvider = ({ children }) => {
                     urlObjDispatch({ type: 'seturlObj', payload: action.payload })
                 }
                 return newArray
+            case 'updateurlHistory': // this is save response on anything once url is created
+                let newArray3 = urlHistory                
+                    newArray3 = updateurlHistory(urlHistory,action.payload)                   
+                
+                return newArray3
             default:
                 return urlHistory;
         }
+    }
+
+    function updateurlHistory(urlHistory,updateUrlObject) {
+        let newArray = []
+        if (urlHistory != null) {
+            newArray = [...urlHistory.filter((item) => item.url != updateUrlObject.url)]
+            if (updateUrlObject.url != "") {
+                newArray.push(updateUrlObject)
+            }
+        } else {
+            return urlHistory
+        }
+        localStorage.setItem('urlHistory', JSON.stringify(newArray));
+        return newArray
     }
 
 
@@ -75,11 +94,11 @@ export const AppProvider = ({ children }) => {
         let newArray = []
         if (urlHistory != null) {
             newArray = [...urlHistory.filter((item) => item.url != urlObj.url)]
-            if(urlObj.url!=""){
+            if (urlObj.url != "") {
                 newArray.push(urlObj)
             }
         } else {
-            if( urlObj.url!="") newArray = [urlObj]
+            if (urlObj.url != "") newArray = [urlObj]
         }
         localStorage.setItem('urlHistory', JSON.stringify(newArray));
         return newArray
