@@ -27,8 +27,10 @@
 
 .form-container textarea {
     min-height: 100px;
-    min-width: 350px;
+    min-width: 80%;
+    max-width: 600px;
     overflow: auto;
+  
 }
 
 .form-container form {
@@ -43,10 +45,6 @@
 
 .form-container form>button {
     width: 200px;
-}
-
-.form-container div {
-    max-width: 400px;
 }
 
 .form-container form>span {

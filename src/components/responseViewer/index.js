@@ -34,7 +34,7 @@ export default ({ viewType }) => {
                  :
 
                  
-                 <textarea style={{height:"auto"}}
+                 <textarea
                  id="response-body" value={responseText} readOnly />
             }
             

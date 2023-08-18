@@ -1,0 +1,23 @@
+textarea#response-body{
+    min-height: 300px ;
+    min-width: 80%;
+    max-width: 600px;
+    overflow: auto;
+}
+
+
+div#response-body{
+    min-width: 80%;
+    max-width: 600px;
+    overflow: auto;
+    padding: 10px;
+    border: 1px solid rgba(128, 128, 128, 0.459);
+    margin-top: 5px;
+    border-radius: 5px;
+}
+
+div#response-body:focus{
+
+    border: 1px solid rgba(11, 174, 255, 0.459);
+}
+
