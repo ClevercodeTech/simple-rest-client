@@ -3,7 +3,7 @@ import './styles.css';
 import PayloadTabBar from '../payloadTabBar';
 import { useApp } from '../../contexts/appContext';
 import ResponseTabBar from '../responseTabBar';
-import { Button, TextField, select, option, form, InputLabel, Input, Box } from '@mui/material';
+import { Button,  Box } from '@mui/material';
 export default () => {
 
   const { urlObj, urlObjDispatch, historyDispatch, isLoading, setIsLoading } = useApp()
@@ -17,6 +17,7 @@ export default () => {
     let requestOptions={}
     try {
        requestOptions = {
+     
         method: urlObj.requestType.toUpperCase(),
         headers: {
           ...(urlObj.headers && JSON.parse(urlObj.headers)),
@@ -51,7 +52,7 @@ export default () => {
       <Box padding={1} margin={1} sx={{ flexDirection: 'row' }}>
         <form onSubmit={handleSubmit} >
           <span>
-            <label htmlFor='http Type' >{urlObj.https == 'https://' ? 'Secure' : 'Unsecure'} </label>
+            <label htmlFor='http Type' >{urlObj.https === 'https://' ? 'Secure' : 'Unsecure'} </label>
             <select
               title='http Type"'
               name="http Type"
@@ -97,7 +98,7 @@ export default () => {
         </form>
 
         <ResponseTabBar />
-        {errorSending!=undefined? <div>
+        {errorSending!==undefined? <div>
           Error! <br/>
           {errorSending}</div>:null}
         
