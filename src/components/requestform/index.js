@@ -36,7 +36,7 @@ export default () => {
 
     try {
       let tempUrl = urlObj.url.replace("https://", '').replace("http://", "")
-      let prefix = urlObj.https
+      let prefix = urlObj.https  
       const response = await fetch(prefix + tempUrl, requestOptions);
       const data = await response.text();
       urlObjDispatch({ type: 'setResponse', payload: data })
